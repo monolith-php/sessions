@@ -17,7 +17,6 @@
     "monolith/component-bootstrapping": "^4",
     "monolith/dependency-injection": "^5",
     "monolith/http": "^4",
-    "monolith/relational-database": "^5",
     "monolith/web-routing": "^11",
     "monolith/collections": "^2"
   },
