@@ -3,8 +3,7 @@
   "description": "Web sessions component for the Monolith framework.",
   "keywords": [
     "monolith",
-    "sessions",
-    "container"
+    "sessions"
   ],
   "authors": [
     {
