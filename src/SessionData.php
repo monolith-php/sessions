@@ -1,20 +1,20 @@
 <?php namespace Monolith\WebSessions;
 
-use Monolith\Collections\Map;
+use Monolith\Collections\MutableMap;
 
 final class SessionData
 {
-    /** @var Map */
+    /** @var MutableMap */
     private $data;
 
-    public function __construct(Map $data = null)
+    public function __construct(MutableMap $data = null)
     {
-        $this->data = $data ?: new Map;
+        $this->data = $data ?: new MutableMap;
     }
 
     public static function fromArray(array $data)
     {
-        return new static(new Map($data));
+        return new static(new MutableMap($data));
     }
 
     public function has(string $key): bool
@@ -42,7 +42,7 @@ final class SessionData
         $this->data = $newData->all();
     }
 
-    public function all(): Map
+    public function all(): MutableMap
     {
         return $this->data;
     }

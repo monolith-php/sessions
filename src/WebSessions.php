@@ -42,7 +42,7 @@ final class WebSessions implements Middleware
 
     private function assignSessionData(Request $request)
     {
-        $currentSessionId = $request->cookie('session_id');
+        $currentSessionId = $request->cookies()->get('session_id');
         if ($currentSessionId) {
             $this->sessionData->overwrite(
                 $this->sessionStorage->retrieve('session_data_' . $currentSessionId)
