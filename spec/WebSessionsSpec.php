@@ -54,11 +54,9 @@ class WebSessionsSpec extends ObjectBehavior
 
     function it_can_store_session_data()
     {
-        $cookies = new Map([
-            'session_id' => '123',
-        ]);
+        $_COOKIE['session_id'] = '123';
 
-        $request = new Request(new Map, new Map, new Map, new Map, $cookies, new Map);
+        $request = Request::fromGlobals();
 
         $this->process($request, function (Request $r) {
             /** @var SessionData $sessionData */
@@ -79,13 +77,11 @@ class WebSessionsSpec extends ObjectBehavior
 
     function it_can_retrieve_session_data_from_a_request()
     {
-        $cookies = new Map([
-            'session_id' => '234',
-        ]);
+        $_COOKIE['session_id'] = '234';
 
         $this->storage->store('session_data_234', SessionData::fromArray(['example' => 'abc']));
 
-        $request = new Request(new Map, new Map, new Map, new Map, $cookies, new Map);
+        $request = Request::fromGlobals();
 
         $this->process($request, function (Request $r) {
             /** @var SessionData $sessionData */
@@ -99,13 +95,11 @@ class WebSessionsSpec extends ObjectBehavior
 
     function it_can_remove_session_data()
     {
-        $cookies = new Map([
-            'session_id' => '234',
-        ]);
+        $_COOKIE['session_id'] = '234';
 
         $this->storage->store('session_data_234', SessionData::fromArray(['example' => 'abc']));
 
-        $request = new Request(new Map, new Map, new Map, new Map, $cookies, new Map);
+        $request = Request::fromGlobals();
 
         $this->process($request, function (Request $r) {
             /** @var SessionData $sessionData */
