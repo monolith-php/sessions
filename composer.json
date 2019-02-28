@@ -18,7 +18,7 @@
     "monolith/component-bootstrapping": "^4",
     "monolith/dependency-injection": "^5",
     "monolith/http": "^8",
-    "monolith/web-routing": "^17",
+    "monolith/web-routing": "^18",
     "predis/predis": "^2.0@dev",
     "ramsey/uuid": "^3"
   },
