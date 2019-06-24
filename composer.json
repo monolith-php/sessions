@@ -13,12 +13,12 @@
   ],
   "require": {
     "php": "^7.2",
-    "monolith/collections": "^5",
-    "monolith/configuration": "^3",
-    "monolith/component-bootstrapping": "^5",
-    "monolith/dependency-injection": "^6",
-    "monolith/http": "^9",
-    "monolith/web-routing": "^19",
+    "monolith/collections": "^6",
+    "monolith/configuration": "^4",
+    "monolith/component-bootstrapping": "^6",
+    "monolith/dependency-injection": "^7",
+    "monolith/http": "^10",
+    "monolith/web-routing": "^20",
     "predis/predis": "^2.0@dev",
     "ramsey/uuid": "^3"
   },
