@@ -1,20 +1,20 @@
 <?php namespace Monolith\WebSessions;
 
-use Monolith\Collections\MutableDict;
+use Monolith\Collections\MutableDictionary;
 
 final class SessionData
 {
-    /** @var MutableDict */
+    /** @var MutableDictionary */
     private $data;
 
-    public function __construct(MutableDict $data = null)
+    public function __construct(MutableDictionary $data = null)
     {
-        $this->data = $data ?: new MutableDict;
+        $this->data = $data ?: new MutableDictionary;
     }
 
     public static function fromArray(array $data)
     {
-        return new static(new MutableDict($data));
+        return new static(new MutableDictionary($data));
     }
 
     public function has(string $key): bool
@@ -42,7 +42,7 @@ final class SessionData
         $this->data = $newData->all();
     }
 
-    public function all(): MutableDict
+    public function all(): MutableDictionary
     {
         return $this->data;
     }

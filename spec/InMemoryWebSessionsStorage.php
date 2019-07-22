@@ -1,6 +1,6 @@
 <?php namespace spec\Monolith\WebSessions;
 
-use Monolith\Collections\Dict;
+use Monolith\Collections\Dictionary;
 use Monolith\WebSessions\SessionData;
 use Monolith\WebSessions\WebSessionStorage;
 
@@ -11,7 +11,7 @@ final class InMemoryWebSessionsStorage implements WebSessionStorage
     public function __construct()
     {
         // map of session id => SessionData
-        $this->sessions = new Dict;
+        $this->sessions = Dictionary::empty();
     }
 
     public function store(string $key, SessionData $data)

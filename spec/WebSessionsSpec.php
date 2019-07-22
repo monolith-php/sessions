@@ -1,6 +1,5 @@
 <?php namespace spec\Monolith\WebSessions;
 
-use Monolith\Collections\Dict;
 use Monolith\ComponentBootstrapping\ComponentLoader;
 use Monolith\Configuration\ConfigurationBootstrap;
 use Monolith\DependencyInjection\Container;
