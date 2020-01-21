@@ -30,7 +30,7 @@ final class WebSessions implements Middleware
         // if there's not already a session id then store it
         if ( ! $sessionId) {
             $sessionId = (string) Uuid::uuid4();
-            $response = $response->addCookie(new Cookie('session_id', $sessionId));
+            $response = $response->withCookie(new Cookie('session_id', $sessionId));
         }
 
         // store session data
