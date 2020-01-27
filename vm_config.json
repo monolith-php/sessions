@@ -1,0 +1,34 @@
+{
+  "hostname": "web-sessions",
+  "dbuser": "root",
+  "dbpasswd": "password",
+  "databases": [
+    "development",
+    "testing"
+  ],
+  "sites": [
+    {
+      "hostname": "app.local",
+      "document_root": "/vagrant/public"
+    }
+  ],
+  "php_configs": [
+    {
+      "option": "upload_max_filesize",
+      "value": "100M"
+    },
+    {
+      "option": "post_max_size",
+      "value": "100M"
+    }
+  ],
+  "php_version": "7.3",
+  "install_redis": "yes",
+  "install_db": "no",
+  "install_web": "yes",
+  "install_javascript_build_system": "no",
+  "node_major_version": "10",
+  "enable_swap": "yes",
+  "swap_size_in_mb": "1024",
+  "install_ohmyzsh": "yes"
+}
