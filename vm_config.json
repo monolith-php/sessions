@@ -22,7 +22,7 @@
       "value": "100M"
     }
   ],
-  "php_version": "7.3",
+  "php_version": "7.4",
   "install_redis": "yes",
   "install_db": "no",
   "install_web": "yes",
