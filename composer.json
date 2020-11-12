@@ -20,7 +20,7 @@
     "monolith/http": "^11",
     "monolith/web-routing": "^22",
     "predis/predis": "^2.0@dev",
-    "ramsey/uuid": "^3"
+    "ramsey/uuid": "^4"
   },
   "require-dev": {
     "phpspec/phpspec": "dev-master"
