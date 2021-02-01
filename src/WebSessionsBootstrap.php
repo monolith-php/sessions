@@ -10,6 +10,11 @@ final class WebSessionsBootstrap implements ComponentBootstrap
 
     public function bind(Container $container): void
     {
+        # same data object everywhere that we load it
+        # this starts empty, but will be managed by
+        # the WebSessions middleware
+        $container->singleton(SessionData::class);
+        
         $this->config = $container(Config::class);
 
         $container->singleton(
@@ -31,8 +36,6 @@ final class WebSessionsBootstrap implements ComponentBootstrap
             );
         }
         );
-
-        $container->singleton(SessionData::class);
     }
 
     public function init(Container $container): void

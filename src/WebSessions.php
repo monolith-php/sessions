@@ -1,7 +1,6 @@
 <?php namespace Monolith\WebSessions;
 
 use Ramsey\Uuid\Uuid;
-use Monolith\Http\Cookie;
 use Monolith\Http\Request;
 use Monolith\Http\Response;
 use Monolith\WebRouting\Middleware;
@@ -16,33 +15,25 @@ final class WebSessions implements Middleware
 
     public function process(Request $request, callable $next): Response
     {
-        // retrieve session data
-        $sessionId = $this->assignSessionData($request);
+        # Restore Session
+        $sessionId =
+            $request->cookies()->get('session_id')
+                ?: Uuid::uuid4()->toString();
 
+        $sessionKey = 'session_data_' . $sessionId;
+
+        $this->sessionData->overwrite(
+            $this->sessionStorage->retrieve($sessionKey)
+        );
+
+        # Process Request
         /** @var Response $response */
         $response = $next($request);
 
-        // if there's not already a session id then store it
-        if ( ! $sessionId) {
-            $sessionId = (string) Uuid::uuid4();
-            $response = $response->withCookie(new Cookie('session_id', $sessionId));
-        }
+        # Store Session
+        $this->sessionStorage->store($sessionKey, $this->sessionData);
 
-        // store session data
-        $this->sessionStorage->store('session_data_' . $sessionId, $this->sessionData);
-
-        // pass the response on
+        # Bubble Up, Buttercup
         return $response;
-    }
-
-    private function assignSessionData(Request $request)
-    {
-        $currentSessionId = $request->cookies()->get('session_id');
-        if ($currentSessionId) {
-            $this->sessionData->overwrite(
-                $this->sessionStorage->retrieve('session_data_' . $currentSessionId)
-            );
-        }
-        return $currentSessionId;
     }
 }
