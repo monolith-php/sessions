@@ -1,18 +1,18 @@
 <?php namespace Monolith\WebSessions;
 
+use JetBrains\PhpStorm\Pure;
 use Monolith\Collections\MutableDictionary;
 
 final class SessionData
 {
-    /** @var MutableDictionary */
-    private $data;
+    private MutableDictionary $data;
 
     public function __construct(MutableDictionary $data = null)
     {
         $this->data = $data ?: new MutableDictionary;
     }
 
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): static
     {
         return new static(new MutableDictionary($data));
     }
@@ -47,7 +47,7 @@ final class SessionData
         return $this->data;
     }
 
-    public function toArray(): array
+    #[Pure] public function toArray(): array
     {
         return $this->data->toArray();
     }

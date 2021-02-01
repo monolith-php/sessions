@@ -1,22 +1,17 @@
 <?php namespace Monolith\WebSessions;
 
+use Ramsey\Uuid\Uuid;
 use Monolith\Http\Cookie;
 use Monolith\Http\Request;
 use Monolith\Http\Response;
 use Monolith\WebRouting\Middleware;
-use Ramsey\Uuid\Uuid;
 
 final class WebSessions implements Middleware
 {
-    /** @var WebSessionStorage */
-    private $sessionStorage;
-    /** @var SessionData */
-    private $sessionData;
-
-    public function __construct(WebSessionStorage $sessionStorage, SessionData $sessionData)
-    {
-        $this->sessionStorage = $sessionStorage;
-        $this->sessionData = $sessionData;
+    public function __construct(
+        private WebSessionStorage $sessionStorage,
+        private SessionData $sessionData
+    ) {
     }
 
     public function process(Request $request, callable $next): Response
