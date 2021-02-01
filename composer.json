@@ -6,7 +6,7 @@
     "sessions"
   ],
   "require": {
-    "php": ">=7.4",
+    "php": ">=8.0",
     "monolith/collections": "^8",
     "monolith/configuration": "^6",
     "monolith/component-bootstrapping": "^7",

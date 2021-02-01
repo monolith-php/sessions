@@ -6,8 +6,7 @@ use Monolith\DependencyInjection\Container;
 
 final class WebSessionsBootstrap implements ComponentBootstrap
 {
-    /** @var Config */
-    private $config;
+    private Config $config;
 
     public function bind(Container $container): void
     {
