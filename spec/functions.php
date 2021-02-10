@@ -1,56 +1,63 @@
 <?php
 
-function d(...$vars) {
+function d(...$vars)
+{
     foreach ($vars as $var) {
         var_dump($var);
     }
     die();
 }
 
-function dw(...$vars) {
-    d(...array_map(function($var) {
-        return $var->getWrappedObject();
-    }, $vars));
+function dw(...$vars)
+{
+    d(
+        ...array_map(
+               function ($var) {
+                   return $var->getWrappedObject();
+               }, $vars
+           )
+    );
 }
 
-use PhpSpec\CodeAnalysis\MagicAwareAccessInspector;
-use PhpSpec\CodeAnalysis\VisibilityAccessInspector;
-use PhpSpec\Console\Assembler\PresenterAssembler;
-use PhpSpec\Exception\ExceptionFactory;
-use PhpSpec\Factory\ReflectionFactory;
-use PhpSpec\Loader\Node\ExampleNode;
-use PhpSpec\Matcher\ArrayContainMatcher;
-use PhpSpec\Matcher\ArrayCountMatcher;
-use PhpSpec\Matcher\ArrayKeyMatcher;
-use PhpSpec\Matcher\ArrayKeyValueMatcher;
-use PhpSpec\Matcher\CallbackMatcher;
-use PhpSpec\Matcher\ComparisonMatcher;
-use PhpSpec\Matcher\IdentityMatcher;
 use PhpSpec\Matcher\Matcher;
-use PhpSpec\Matcher\MatchersProvider;
-use PhpSpec\Matcher\ObjectStateMatcher;
+use PhpSpec\Wrapper\Subject;
+use PhpSpec\Wrapper\Wrapper;
+use PhpSpec\Wrapper\Unwrapper;
+use PhpSpec\Matcher\TypeMatcher;
+use PhpSpec\Matcher\ThrowMatcher;
 use PhpSpec\Matcher\ScalarMatcher;
-use PhpSpec\Matcher\StringContainMatcher;
+use PhpSpec\Runner\MatcherManager;
+use PhpSpec\Wrapper\Subject\Caller;
+use PhpSpec\Loader\Node\ExampleNode;
+use PhpSpec\Matcher\ArrayKeyMatcher;
+use PhpSpec\Matcher\CallbackMatcher;
+use PhpSpec\Matcher\IdentityMatcher;
+use PhpSpec\Matcher\MatchersProvider;
 use PhpSpec\Matcher\StringEndMatcher;
+use PhpSpec\Factory\ReflectionFactory;
+use PhpSpec\Matcher\ArrayCountMatcher;
+use PhpSpec\Matcher\ComparisonMatcher;
+use PhpSpec\Exception\ExceptionFactory;
+use PhpSpec\Matcher\ObjectStateMatcher;
 use PhpSpec\Matcher\StringRegexMatcher;
 use PhpSpec\Matcher\StringStartMatcher;
-use PhpSpec\Matcher\ThrowMatcher;
-use PhpSpec\Matcher\TypeMatcher;
-use PhpSpec\Runner\MatcherManager;
-use PhpSpec\ServiceContainer\IndexedServiceContainer;
-use PhpSpec\Wrapper\Subject;
-use PhpSpec\Wrapper\Subject\Caller;
-use PhpSpec\Wrapper\Subject\ExpectationFactory;
-use PhpSpec\Wrapper\Subject\SubjectWithArrayAccess;
+use PhpSpec\Matcher\ArrayContainMatcher;
+use PhpSpec\Matcher\ArrayKeyValueMatcher;
+use PhpSpec\Matcher\StringContainMatcher;
 use PhpSpec\Wrapper\Subject\WrappedObject;
-use PhpSpec\Wrapper\Unwrapper;
-use PhpSpec\Wrapper\Wrapper;
+use PhpSpec\Wrapper\Subject\ExpectationFactory;
+use PhpSpec\Console\Assembler\PresenterAssembler;
+use PhpSpec\CodeAnalysis\MagicAwareAccessInspector;
+use PhpSpec\CodeAnalysis\VisibilityAccessInspector;
+use PhpSpec\Wrapper\Subject\SubjectWithArrayAccess;
+use PhpSpec\ServiceContainer\IndexedServiceContainer;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+
 $useExpect = true;
 if (getenv('PHPSPEC_DISABLE_EXPECT') || (defined('PHPSPEC_DISABLE_EXPECT') && PHPSPEC_DISABLE_EXPECT)) {
     $useExpect = false;
 }
-if ($useExpect && !function_exists('expect')) {
+if ($useExpect && ! function_exists('expect')) {
     function expect($sus)
     {
         $container = new IndexedServiceContainer;
@@ -62,7 +69,7 @@ if ($useExpect && !function_exists('expect')) {
         $accessInspector = new MagicAwareAccessInspector(new VisibilityAccessInspector);
         $reflectionFactory = new ReflectionFactory();
         $exampleNode = new ExampleNode('expect', new \ReflectionFunction(__FUNCTION__));
-        $matchers  = new MatcherManager($presenter);
+        $matchers = new MatcherManager($presenter);
         $matchers->add(new IdentityMatcher($presenter));
         $matchers->add(new ComparisonMatcher($presenter));
         $matchers->add(new ThrowMatcher($unwrapper, $presenter, $reflectionFactory));
@@ -84,7 +91,7 @@ if ($useExpect && !function_exists('expect')) {
                 foreach ($object->getMatchers() as $name => $matcher) {
                     if ($matcher instanceof Matcher) {
                         $matchers->add($matcher);
-                    } elseif(is_callable($matcher)) {
+                    } elseif (is_callable($matcher)) {
                         $matchers->add(new CallbackMatcher($name, $matcher, $presenter));
                     } else {
                         throw new \RuntimeException('Custom matcher has to implement "PhpSpec\Matcher\MatcherInterface" or be a callable');

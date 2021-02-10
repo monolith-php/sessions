@@ -13,13 +13,8 @@ use PhpSpec\ObjectBehavior;
 
 class WebSessionsSpec extends ObjectBehavior
 {
-    /** @var Container */
-    private $container;
-    /** @var InMemoryWebSessionsStorage */
-    private $storage;
-    /** @var SessionData */
-    private $sessionData;
-
+    private Container $container;
+    private WebSessionStorage $storage;
     function bootstrapMonolith(): Container
     {
         $container = new Container;
@@ -41,9 +36,9 @@ class WebSessionsSpec extends ObjectBehavior
 
         // instantiate
         $this->storage = $this->container->get(WebSessionStorage::class);
-        $this->sessionData = $this->container->get(SessionData::class);
+        $sessionData = $this->container->get(SessionData::class);
 
-        $this->beConstructedWith($this->storage, $this->sessionData);
+        $this->beConstructedWith($this->storage, $sessionData);
     }
 
     function it_is_initializable()
@@ -66,8 +61,8 @@ class WebSessionsSpec extends ObjectBehavior
 
             return Response::ok('');
         });
-
-        $data = expect($this->storage->retrieve('session_data_123'));
+        
+        $data = expect($this->storage->retrieve('session_123'));
 
         $data->shouldHaveType(SessionData::class);
         $data->has('example')->shouldBe(true);
@@ -78,7 +73,7 @@ class WebSessionsSpec extends ObjectBehavior
     {
         $_COOKIE['session_id'] = '234';
 
-        $this->storage->store('session_data_234', SessionData::fromArray(['example' => 'abc']));
+        $this->storage->store('session_234', SessionData::fromArray(['example' => 'abc']));
 
         $request = Request::fromGlobals();
 
@@ -96,7 +91,7 @@ class WebSessionsSpec extends ObjectBehavior
     {
         $_COOKIE['session_id'] = '234';
 
-        $this->storage->store('session_data_234', SessionData::fromArray(['example' => 'abc']));
+        $this->storage->store('session_234', SessionData::fromArray(['example' => 'abc']));
 
         $request = Request::fromGlobals();
 
@@ -110,7 +105,7 @@ class WebSessionsSpec extends ObjectBehavior
             return Response::ok('');
         });
 
-        $data = expect($this->storage->retrieve('session_data_234'));
+        $data = expect($this->storage->retrieve('session_234'));
         $data->has('example')->shouldBe(false);
     }
 }

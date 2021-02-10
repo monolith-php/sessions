@@ -6,7 +6,7 @@ use Monolith\WebSessions\WebSessionStorage;
 
 final class InMemoryWebSessionsStorage implements WebSessionStorage
 {
-    private $sessions;
+    private Dictionary $sessions;
 
     public function __construct()
     {

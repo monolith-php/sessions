@@ -6,19 +6,29 @@
     "sessions"
   ],
   "require": {
-    "php": ">=8.0",
-    "monolith/collections": "^8",
-    "monolith/configuration": "^6",
-    "monolith/component-bootstrapping": "^7",
-    "monolith/dependency-injection": "^8",
-    "monolith/http": "^11",
-    "monolith/web-routing": "^22",
+    "php": ">=8",
+    "monolith/collections": "^9",
+    "monolith/configuration": "^7",
+    "monolith/component-bootstrapping": "^8",
+    "monolith/dependency-injection": "^9",
+    "monolith/http": "^12",
+    "monolith/web-routing": "^23",
     "predis/predis": "^2.0@dev",
     "ramsey/uuid": "^4"
   },
   "require-dev": {
-    "phpspec/phpspec": "dev-master"
+    "phpspec/phpspec": "^7"
   },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.humanmusic.eu",
+      "canonical": false,
+      "only": [
+        "monolith/*"
+      ]
+    }
+  ],
   "autoload": {
     "psr-4": {
       "Monolith\\WebSessions\\": "src/"

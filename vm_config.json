@@ -1,4 +1,5 @@
 {
+  "ansible_python_interpreter": "auto_legacy_silent",
   "hostname": "web-sessions",
   "dbuser": "root",
   "dbpasswd": "password",
@@ -22,12 +23,13 @@
       "value": "100M"
     }
   ],
-  "php_version": "7.4",
+  "boost_pam_limits": "yes",
+  "boosted_pam_limit": 40000,
   "install_redis": "yes",
   "install_db": "no",
-  "install_web": "yes",
-  "install_javascript_build_system": "no",
-  "node_major_version": "10",
+  "install_nginx": "no",
+  "install_php": "yes",
+  "php_version": "8.0",
   "enable_swap": "yes",
   "swap_size_in_mb": "1024",
   "install_ohmyzsh": "yes"
