@@ -9,12 +9,12 @@ final class SessionData
 
     public function __construct(MutableDictionary $data = null)
     {
-        $this->data = $data ?: new MutableDictionary;
+        $this->data = $data ?: MutableDictionary::empty();
     }
 
-    public static function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
-        return new static(new MutableDictionary($data));
+        return new self(MutableDictionary::of($data));
     }
 
     public function has(string $key): bool

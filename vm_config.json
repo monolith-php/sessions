@@ -1,5 +1,4 @@
 {
-  "ansible_python_interpreter": "auto_legacy_silent",
   "hostname": "web-sessions",
   "dbuser": "root",
   "dbpasswd": "password",
@@ -10,7 +9,7 @@
   "sites": [
     {
       "hostname": "app.local",
-      "document_root": "/vagrant/public"
+      "document_root": "/vagrant/web"
     }
   ],
   "php_configs": [
@@ -23,14 +22,17 @@
       "value": "100M"
     }
   ],
-  "boost_pam_limits": "yes",
-  "boosted_pam_limit": 40000,
+  "php_modules": ["php{{ php_version }}-mysql", "php{{ php_version }}-gd", "php-apcu", "php{{ php_version }}-curl", "php{{ php_version }}-intl", "php-memcached", "php{{ php_version }}-mbstring", "php{{ php_version }}-xml", "php{{ php_version }}-pgsql", "php{{ php_version }}-dev", "php{{ php_version }}-sqlite3"],
+  "install_rabbit_mq": "no",
   "install_redis": "yes",
   "install_db": "no",
-  "install_nginx": "no",
+  "install_nginx": "yes",
   "install_php": "yes",
-  "php_version": "8.0",
+  "php_version": "8.1",
+  "install_javascript_build_system": "no",
+  "node_major_version": "10",
   "enable_swap": "yes",
   "swap_size_in_mb": "1024",
-  "install_ohmyzsh": "yes"
+  "boost_pam_limits": "yes",
+  "boosted_pam_limit": 40000
 }
